@@ -1,0 +1,40 @@
+export * from './camelCase';
+export * from './concat';
+export * from './constants';
+export * from './crop';
+export * from './empty';
+export * from './endsWith';
+export * from './escapeHtml';
+export * from './escapeRegExp';
+export * from './escapeUnicode';
+export * from './hyphenate';
+export * from './includes';
+export * from './is';
+export * from './lowerCase';
+export * from './lpad';
+export * from './ltrim';
+export * from './quoteString';
+export * from './removeNonASCII';
+export * from './removeNonWord';
+export * from './repeat';
+export * from './replace';
+export * from './replaceAccents';
+export * from './rtrim';
+export * from './slugify';
+export * from './symbols';
+export * from './toString';
+export * from './trim';
+export * from './truncate';
+export * from './unCamelCase';
+export * from './unescapeHtml';
+export * from './unhyphenate';
+export * from './upperCase';
+import { repeat } from './repeat';
+import { hyphenate } from './hyphenate';
+export const repeatSpace = (a: number) => repeat('', a);
+
+export const camelCaseToArray = (str: string): string[] => {
+  return hyphenate(str).split('-');
+};
+
+export { upperFirst, lowerFirst } from 'lodash';
