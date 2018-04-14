@@ -1,5 +1,6 @@
-import { array as _array } from './fp';
-const { unsafeDeleteAt, head, cons, snoc, last} = _array;
+
+export * from 'fp-ts/lib/Array';
+import { unsafeDeleteAt, head, cons, snoc, last} from 'fp-ts/lib/Array';
 /**
  * removes the last element from an array and returns that array.
  * @param a

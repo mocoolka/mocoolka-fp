@@ -1,26 +1,45 @@
-import * as string from './string';
+import * as alt from './Alt';
+import * as array from './Array';
+import * as bounded from './Bounded';
+import * as either from './Either';
+import * as monad from './Monad';
+import * as monocle from './Monocle';
+import * as function_ from './function';
+import * as hkt from './HKT';
+import * as functor from './Functor';
+import * as io from './IO';
+import * as newtype from './NewType';
 import * as object from './object';
+import * as option from './Option';
+import * as ord from './Ord';
 import * as predicate from './predicate';
-import * as d_array from './Array';
+import * as semigroup from './Semigroup';
+
+import * as string from './string';
+import * as sequence from './Sequence';
+import * as setoid from './Setoid';
+import * as strmap from './StrMap';
+import * as traversable from './Traversable';
+import * as type from './Type';
+import * as typeF from './TypeF';
+import * as validation from './Validation';
 import {
-    alt, alternative, applicative, apply, array as s_array, bifunctor, category, chain, chainRec, comonad, console,
-    const as const_, contravariant, either, eitherT, exception, extend, field,
-    foldable, free, function as function_, functor, hkt, identity, invariant, io, ixIo,
-    ixMonad, monad, monoid, monoidal, nonEmptyArray, option, optionT, ord, ordering, pair, plus,
-    profunctor, random, reader, readerT, ring, semigroup, semigroupoid, semiring, set,
-    setoid, state, stateT, store, strmap, task, taskEither, these, trace, traversable, tuple,
-    unfoldable, validation, writer,
-    monocle, types, typesF, newtype,
+    alternative, applicative, apply, bifunctor, category, chain, chainRec, comonad, console,
+    const as const_, contravariant, eitherT, exception, extend, field,
+    foldable, free,  identity, invariant, ixIo,
+    ixMonad,  monoid, monoidal, nonEmptyArray, optionT, ordering, pair, plus,
+    profunctor, random, reader, readerT, ring, semigroupoid, semiring, set,
+    state, stateT, store, task, taskEither, these, trace, tuple,
+    unfoldable, writer,
 } from './fp';
-const array = { ...s_array, ...d_array };
 export {
-    alt, alternative, applicative, apply, array, bifunctor, category, chain, chainRec, comonad, console,
+    alt, alternative, applicative, apply, array, bounded, bifunctor, category, chain, chainRec, comonad, console,
     const_ as const, contravariant, either, eitherT, exception, extend, field,
     foldable, free, function_ as function, functor, hkt, identity, invariant, io, ixIo,
     ixMonad, monad, monoid, monoidal, nonEmptyArray, option, optionT, ord, ordering, pair, plus,
     profunctor, random, reader, readerT, ring, semigroup, semigroupoid, semiring, set,
     setoid, state, stateT, store, strmap, task, taskEither, these, trace, traversable, tuple,
     unfoldable, validation, writer,
-    monocle, types, typesF, newtype,
-    string, object, predicate
+    monocle, type, typeF, newtype,
+    string, object, predicate, sequence
 };
