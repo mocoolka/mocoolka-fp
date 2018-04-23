@@ -20,9 +20,9 @@ describe('Setoid', () => {
     });
 
     it('getProductSetoid', () => {
-        const S = getProductSetoid(setoidString, setoidNumber)
+        const S = getProductSetoid(setoidString, setoidNumber);
         expect(S.equals(['a', 1], ['a', 1])).toEqual(true);
         expect(S.equals(['a', 1], ['b', 1])).toEqual(false);
         expect(S.equals(['a', 1], ['a', 2])).toEqual(false);
-    })
+    });
 });

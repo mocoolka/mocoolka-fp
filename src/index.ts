@@ -1,4 +1,5 @@
 import * as alt from './Alt';
+import * as applicative from './Applicative';
 import * as array from './Array';
 import * as bounded from './Bounded';
 import * as either from './Either';
@@ -21,10 +22,10 @@ import * as setoid from './Setoid';
 import * as strmap from './StrMap';
 import * as traversable from './Traversable';
 import * as type from './Type';
-import * as typeF from './TypeF';
+import * as types from './Types';
 import * as validation from './Validation';
 import {
-    alternative, applicative, apply, bifunctor, category, chain, chainRec, comonad, console,
+    alternative, apply, bifunctor, category, chain, chainRec, comonad, console,
     const as const_, contravariant, eitherT, exception, extend, field,
     foldable, free,  identity, invariant, ixIo,
     ixMonad,  monoid, monoidal, nonEmptyArray, optionT, ordering, pair, plus,
@@ -40,6 +41,6 @@ export {
     profunctor, random, reader, readerT, ring, semigroup, semigroupoid, semiring, set,
     setoid, state, stateT, store, strmap, task, taskEither, these, trace, traversable, tuple,
     unfoldable, validation, writer,
-    monocle, type, typeF, newtype,
+    monocle, type, types, newtype,
     string, object, predicate, sequence
 };

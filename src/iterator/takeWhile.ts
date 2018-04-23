@@ -1,5 +1,5 @@
-import ISequence, {of} from "./Sequence";
-import SequenceIterator from "./SequenceIterator";
+import ISequence, {of} from './Sequence';
+import SequenceIterator from './SequenceIterator';
 
 class TakeWhileIterator<T> implements SequenceIterator<T> {
     private nextItem: T | undefined;

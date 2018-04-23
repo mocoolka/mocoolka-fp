@@ -1,4 +1,4 @@
-import ISequence from "./Sequence";
+import ISequence from './Sequence';
 
 export class ToSet {
 

@@ -1,5 +1,3 @@
-// https://github.com/purescript/purescript-maps
-
 import {
     mapIterator, filterIterator, arrayIterator, objectIteratorValues, getIterator,
     sliceIterator
@@ -37,6 +35,20 @@ export type TSequenceProps<A> = {
     interObject: TPlainObject<A>;
     type: string;
 };
+
+export const distinctIterator = function*<A>(
+    S: Setoid<A> = setoidAny,
+    interIterator: Iterator<A>): Iterator<A> {
+    let value;
+    const result = seq<A>([]);
+    while (!({ value } = interIterator.next()).done) {
+        if (result.includes(value, S)) {
+            continue;
+        }
+        yield value;
+
+    }
+};
 export class Sequence<A> {
     readonly '_A': A;
     readonly '_URI': URI;
@@ -64,9 +76,6 @@ export class Sequence<A> {
     }
     toSubSeq = <B>(iterator: Iterator<B>, reverseIterator?: Iterator<B>) =>
         new Sequence<B>(this.prop as TSequenceProps<any>, iterator, reverseIterator)
-
-    /*     static of = <A>(prop: TSequenceProps<A>, iterator: Iterator<A>, reverseIterator?: Iterator<A>) =>
-            new Sequence<A>(prop, iterator, reverseIterator) */
 
     cacheResult() {
         if (isUndefined(this.cache) && this.iterator) {

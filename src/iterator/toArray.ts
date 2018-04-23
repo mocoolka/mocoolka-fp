@@ -1,4 +1,4 @@
-import ISequence from "./Sequence";
+import ISequence from './Sequence';
 
 export class ToArray {
 
@@ -9,8 +9,8 @@ export class ToArray {
      * @param {Array<T>} array
      * @returns {Array<T>}
      */
-    toArray<T>(this: ISequence<T>, array?: Array<T>): Array<T> {
-        const result: Array<T> = array || [];
+    toArray<T>(this: ISequence<T>, array?: T[]): T[] {
+        const result: T[] = array || [];
         while (this.iterator.hasNext()) {
             result.push(this.iterator.next());
         }
@@ -24,7 +24,7 @@ export class ToArray {
      * @param {Array<T>} array
      * @returns {Array<T>}
      */
-    toList<T>(this: ISequence<T>, array?: Array<T>): Array<T> {
+    toList<T>(this: ISequence<T>, array?: T[]): T[] {
         return this.toArray(array);
     }
 

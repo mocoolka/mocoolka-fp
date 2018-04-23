@@ -15,7 +15,7 @@ export const mapIterator = function*<A, B>(fn: (a: A) => B, interIterator: Itera
   }
 };
 
-export const numberIterator = function* (n: number, isReserved: boolean) {
+export const numberIterator = function*(n: number, isReserved: boolean) {
   const initValue = isReserved ? n - 1 : 0;
   const stopValue = isReserved ? -1 : n;
   let nextValue = initValue;
@@ -69,19 +69,6 @@ export const takeWhileIterator = function*<A>(
   }
 };
 export const skipWhileIterator = function*<A>(
-  predicate: (a: A) => boolean,
-  interIterator: Iterator<A>): Iterator<A> {
-  let value;
-  while (!({ value } = interIterator.next()).done) {
-    if (!predicate(value)) {
-      continue;
-    }
-
-    yield value;
-
-  }
-};
-export const distinctIterator = function*<A>(
   predicate: (a: A) => boolean,
   interIterator: Iterator<A>): Iterator<A> {
   let value;
@@ -163,6 +150,5 @@ export const setIterator = function*<T>(iterator: Iterator<T>) {
   let value;
   while (!({ value } = iterator.next()).done) {
     yield [i++, value];
-
   }
 };

@@ -1,4 +1,4 @@
-import ISequence from "./Sequence";
+import ISequence from './Sequence';
 
 export class Unzip {
 
@@ -8,9 +8,9 @@ export class Unzip {
      *
      * @returns {[Array<T> , Array<S>]}
      */
-    unzip<T, S>(this: ISequence<[T, S]>): [Array<T>, Array<S>] {
-        const array1: Array<T> = [];
-        const array2: Array<S> = [];
+    unzip<T, S>(this: ISequence<[T, S]>): [T[], S[]] {
+        const array1: T[] = [];
+        const array2: S[] = [];
         while (this.iterator.hasNext()) {
             const [first, second] = this.iterator.next();
             array1.push(first);

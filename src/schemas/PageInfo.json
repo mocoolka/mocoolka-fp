@@ -1,0 +1,22 @@
+{
+  "name": "PageInfo",
+  "type": "view",
+  "properties": [
+    {
+      "name": "hasNextPage",
+      "type": "boolean",
+      "require": true
+    },
+    {
+      "name": "hasPreviousPage",
+      "type": "boolean",
+      "require": true
+    },
+    {
+      "name": "startCursor"
+    },
+    {
+      "name": "endCursor"
+    }
+  ]
+}

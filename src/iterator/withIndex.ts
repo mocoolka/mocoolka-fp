@@ -1,6 +1,6 @@
-import ISequence, {of} from "./Sequence";
-import IndexedValue from "./IndexedValue";
-import SequenceIterator from "./SequenceIterator";
+import ISequence, {of} from './Sequence';
+import IndexedValue from './IndexedValue';
+import SequenceIterator from './SequenceIterator';
 
 class IndexIterator<T> implements SequenceIterator<IndexedValue<T>> {
     private index = -1;

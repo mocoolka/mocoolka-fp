@@ -4,7 +4,7 @@
     ".(ts|tsx)": "../node_modules/ts-jest/preprocessor.js"
   },
   "testEnvironment": "node",
-  "testRegex": "(/spec/.*|Sequence1\\.(test|spec))\\.(ts|tsx|js)$",
+  "testRegex": "(/tests/printStatic\\.(test|spec))\\.(ts|tsx|js)$",
   "moduleFileExtensions": [
     "ts",
     "tsx",

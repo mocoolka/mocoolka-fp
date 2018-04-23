@@ -1,6 +1,6 @@
 import { filter, catOptions, array } from '../Array';
-import { stringCompare} from '../Compare';
-import { Optional, Lens } from '../Monocle';
+import { stringCompare, ConditionString, TStringCompareKeys } from '../Compare';
+import { Lens } from '../Monocle';
 import { andArray, compose, constant, orArray } from '../function';
 import { get } from '../object';
 import { isNil } from '../predicate';
@@ -20,46 +20,27 @@ const mFileOwnWithNull = Lens.fromProp<MFile, 'own'>('own');
 // const mFileDate = Lens.fromProp<MFile, 'date'>('date');
 // Lens.fromNullableProp<MFile, string, 'own'>('own', '').asFold().exist;
 
-interface Co {
-    name: string;
-    value: any;
-    condition: string;
+const condition1: Array<ConditionString<MFile, 'in'>> = [
+    {
+        name: 'name',
+        op: 'in',
+        value: ['a.txt'],
+    },
+];
+interface WhereInput<A> {
+    and?: WhereInput<A>;
+    condition: Array<ConditionString<A, TStringCompareKeys>>;
+    or?: WhereInput<A>;
 }
-
-interface WhereInput {
-    and?: WhereInput;
-    c: Co[];
-    or?: WhereInput;
-    name?: string;
-    nameNot?: string;
-    nameStartsWith?: string;
-    own?: string;
-    ownNot?: string;
-    ownEmpty?: boolean;
-    isTxt?: boolean;
-}
-
-const whereInputName = Optional.fromNullableProp<WhereInput, string, 'name'>('name');
-const whereInputNameNot = Optional.fromNullableProp<WhereInput, string, 'nameNot'>('nameNot');
-const whereInputNameStartWith = Optional.fromNullableProp<WhereInput, string, 'nameStartsWith'>('nameStartsWith');
-const whereInputOwn = Optional.fromNullableProp<WhereInput, string, 'own'>('own');
-const whereInputOwnNot = Optional.fromNullableProp<WhereInput, string, 'ownNot'>('ownNot');
-const whereInputOwnEmpty = Optional.fromNullableProp<WhereInput, boolean, 'ownEmpty'>('ownEmpty');
-// const whereInputisTxt = Optional.fromNullableProp<WhereInput, boolean, 'isTxt'>('isTxt');
-interface Filter {
-    where: WhereInput;
-    orderBy?: any;
-    skip?: number;
-    after?: string;
-    before?: string;
-    first?: number;
-    last?: number;
-}
-const query = (_filter: Filter) => {
+const query = () => {
     return filter(files, getWhereInputCondition(_filter.where));
 };
-const getWhereInputCondition = (where: WhereInput, op: 'and' | 'or' = 'and') => {
+const getWhereInputCondition = <A>(where: WhereInput<A>, op: 'and' | 'or' = 'and') => {
     const _op = op === 'and' ? andArray : orArray;
+    where.condition.forEach(a => {
+        const c = stringCompare[a.op];
+        //mFileName.asFold().exist(stringCompare[a.op](a.value));
+    });
     const nameEq = whereInputName.getOption(where).map(stringCompare.eq).map(mFileName.asFold().exist);
     const nameNotEq = whereInputNameNot.getOption(where)
         .map(stringCompare.not).map(mFileName.asFold().exist);

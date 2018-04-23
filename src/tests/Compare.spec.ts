@@ -55,5 +55,5 @@ describe('Compare', () => {
         expect(booleanCompare.not(true)(true)).toEqual(false);
         expect(booleanCompare.not(true)(false)).toEqual(true);
     });
-    
+
 });

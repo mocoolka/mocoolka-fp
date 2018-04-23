@@ -1,5 +1,5 @@
 import { not } from '../function';
-import { } from '../predicate'
+import { } from '../predicate';
 export * from './camelCase';
 export * from './concat';
 export * from './constants';
@@ -39,7 +39,7 @@ export const camelCaseToArray = (str: string): string[] => {
  * Checks if string ends with specified suffix.
  */
 export const endsWith = (suffix: string) => (str: string) =>
-   str.indexOf(suffix, str.length - suffix.length) !== -1;
+  str.indexOf(suffix, str.length - suffix.length) !== -1;
 
 export const notEndsWith = (substring: string) => not(endsWith(substring));
 /**
@@ -53,19 +53,19 @@ export const notEndsWith = (substring: string) => not(endsWith(substring));
  */
 export const includes = (str: string, substring: string, fromIndex = 0) => str.indexOf(substring, fromIndex) !== -1;
 export { upperFirst, lowerFirst } from 'lodash';
-export const contains = (substring: string ) => (str: string) =>
-   str.indexOf(substring, 0) !== -1;
+export const contains = (substring: string) => (str: string) =>
+  str.indexOf(substring, 0) !== -1;
 
-export const ins = (v: string[]) => (str: string ) =>
-   v.includes(str);
+export const ins = (v: string[]) => (str: string) =>
+  v.includes(str);
 export const notIn = (a: string[]) => (str: string) =>
   !ins(a)(str);
 
-export const notContains = (substring: string ) => not(contains(substring));
+export const notContains = (substring: string) => not(contains(substring));
 /**
  * Checks if string ends with specified suffix.
  */
-export const startsWith = (suffix: string ) => (str: string) =>
-   str.indexOf(suffix, 0) !== -1;
+export const startsWith = (suffix: string) => (str: string) =>
+  str.indexOf(suffix, 0) !== -1;
 
-export const notStartsWith = (substring: string ) => not(startsWith(substring));
+export const notStartsWith = (substring: string) => not(startsWith(substring));
