@@ -1,6 +1,6 @@
 export const isPositiveNumberOrZero = (num: number) => Number.isFinite(num) && num >= 0;
 import { or } from './function';
-
+export type Is<A> = (a: any) => a is A;
 export const getTypeName = (value: any) => {
     const typeofObj = typeof value;
     if (typeofObj !== 'object' && typeofObj !== 'function') {
@@ -38,11 +38,14 @@ export const isArrayLike = (value: any) => value && typeof value.length === 'num
  * Determines whether the passed value is a Boolean instance.
  */
 export const isBoolean = (a: any): a is boolean => 'boolean' === getTypeName(a);
-
+/*
+ * Determines whether the passed value is a Symbol instance.
+ */
+export const isSymbol = (a: any): a is symbol => typeof a === 'symbol';
 /*
  * Determines whether the passed value is a Date instance.
  */
-export const isDate = (a: any): a is Date => 'Date' === getTypeName(a);
+export const isDate: Is<Date> = (a: any): a is Date => 'Date' === getTypeName(a);
 
 /*
  * Determines whether the passed value is empty.
@@ -132,7 +135,7 @@ export const isNumber = (a: any): a is number => 'number' === getTypeName(a);
  */
 export const isObject = (a: any): a is { [name: string]: any } => 'Object' === getTypeName(a);
 
-export type TPlainObject<T>={ [name: string]: T };
+export type TPlainObject<T> = { [name: string]: T };
 /*
  * Determines whether the passed value is a object .
  */
@@ -161,12 +164,12 @@ export const isTypedArray = (ar: any) => {
 
 
 
-const UNDEF = undefined;
+const UNDEF:any = undefined;
 
 /*
  * Determines whether the passed value is a undefined .
  */
-export const isUndefined = (val: any): val is undefined => val === UNDEF;
+export const isUndefined: Is<undefined> = (val: any): val is undefined => val === UNDEF;
 
 export const propExist = (a: { [name: string]: any }, propName: string) => a[propName] !== undefined;
 

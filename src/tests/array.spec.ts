@@ -1,9 +1,17 @@
 import {
     deleteLast, deleteFirst, moveAndFillLeftOrRight, timeSelf,
-    moveAndFillLeft, moveAndFillRight
+    moveAndFillLeft, moveAndFillRight, removeduplicate, remove,
+    sliceFirst, sliceAfter, sliceBefore, sliceLast, sliceSkip
 } from '../Array';
 const a = [1, 2, 3];
 describe('array', () => {
+    it('removeduplicate', () => {
+        expect(removeduplicate([1, 2, 1, 2, 3])).toEqual([1, 2, 3]);
+        expect(removeduplicate([])).toEqual([]);
+    });
+    it('remove', () => {
+        expect(remove([1, 2, 3], b => b === 2)).toEqual([1, 3]);
+    });
     it('deleteLast', () => {
         expect(deleteLast(a)).toEqual([1, 2]);
         expect(deleteLast([])).toEqual([]);
@@ -29,4 +37,20 @@ describe('array', () => {
         expect(timeSelf(3)([1, 2, 3, 4, 5])(moveAndFillRight)).toEqual([1, 1, 1, 1, 2]);
         expect(timeSelf(3)([1, 2, 3, 4, 5])(moveAndFillLeft)).toEqual([4, 5, 5, 5, 5]);
     });
+    it('sliceFirst', () => {
+        expect(sliceFirst(2)([1, 2, 3, 4])).toEqual([1, 2]);
+    });
+    it('sliceLast', () => {
+        expect(sliceLast(2)([1, 2, 3, 4])).toEqual([3, 4]);
+    });
+    it('sliceSkip', () => {
+        expect(sliceSkip(2)([1, 2, 3, 4])).toEqual([3, 4]);
+    });
+    it('sliceBefore', () => {
+        expect(sliceBefore(b => b === 3)([1, 2, 3, 4])).toEqual([1, 2]);
+    });
+    it('sliceAfter', () => {
+        expect(sliceAfter(b => b === 3)([1, 2, 3, 4])).toEqual([4]);
+    });
+
 });

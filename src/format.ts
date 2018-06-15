@@ -24,7 +24,7 @@ export const printDescription = (description: string | undefined, i: number): st
     return '';
 };
 
-export const escapeString = (s: string): string => `\`${s.replace(/'/g, '\\\'')}\``;
+export const escapeString = (s: string): string => `\'${s.replace(/'/g, '\\\'')}\'`;
 
 export const isValidPropertyKey = (s: string): boolean => /[-\/\s]/.exec(s) === null;
 

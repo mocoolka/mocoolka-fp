@@ -1,10 +1,9 @@
+import { lift, getFunctorComposition, flap, voidRight, voidLeft } from '../Functor';
+import { array } from '../Array';
+import { StrMap, strmap } from '../StrMap';
+import { option, some } from '../Option';
 
-import { functor } from '../';
-import { array as arrayP } from 'fp-ts';
-import { StrMap, strmap } from 'fp-ts/lib/StrMap';
-import { option } from 'fp-ts';
-const { array } = arrayP;
-const { lift, getFunctorComposition, flap, voidRight, voidLeft } = functor;
+// const { lift, getFunctorComposition, flap, voidRight, voidLeft } = functor;
 describe('Functor', () => {
     it('lift', () => {
         const double = (a: number) => a * 2;
@@ -37,11 +36,11 @@ describe('Functor', () => {
         expect(flap(array)(4, fs)).toEqual([true, true]);
     });
     it('voidRight', () => {
-        expect(voidRight(option.option)(1, option.some('a'))).toEqual(option.some(1));
+        expect(voidRight(option)(1, some('a'))).toEqual(some(1));
     });
 
     it('voidLeft', () => {
         expect(voidLeft(array)([1, 2, 3], 1)).toEqual([1, 1, 1]);
-        expect(voidLeft(option.option)(option.some(1), 'a')).toEqual(option.some('a'));
+        expect(voidLeft(option)(some(1), 'a')).toEqual(some('a'));
     });
 });

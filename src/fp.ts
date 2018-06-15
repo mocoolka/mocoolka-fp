@@ -1,7 +1,7 @@
 import {
     alt, alternative, applicative, apply,  bifunctor, category, chain, chainRec, comonad, console,
     const as const_, contravariant,  eitherT, exception, extend, field,
-    foldable, free,   hkt, identity, invariant,  ixIo,
+    foldable, free,   hkt, identity, invariant,  ixIO,
     ixMonad, monad, monoid, monoidal, nonEmptyArray,  optionT,  ordering, pair, plus,
     profunctor, random, reader, readerT, ring, semigroup, semigroupoid, semiring, set,
     setoid, state, stateT, store,  task, taskEither, these, trace, traversable, tuple,
@@ -11,7 +11,7 @@ import {
 export {
     alt, alternative, applicative, apply,  bifunctor, category, chain, chainRec, comonad, console,
     const_ as const, contravariant,  eitherT, exception, extend, field,
-    foldable, free,  hkt, identity, invariant,  ixIo,
+    foldable, free,  hkt, identity, invariant,  ixIO,
     ixMonad, monad, monoid, monoidal, nonEmptyArray,  optionT,  ordering, pair, plus,
     profunctor, random, reader, readerT, ring, semigroup, semigroupoid, semiring, set,
     setoid, state, stateT, store,  task, taskEither, these, trace, traversable, tuple,
