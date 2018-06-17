@@ -1,9 +1,11 @@
 {
   "name": "mocoolka-fp",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "author": "fastspeeed@gmail.com",
   "engines": {
     "node": ">= 4"
@@ -19,7 +21,7 @@
     "build": "rm -rf lib/ && tsc ",
     "precommit": "npm run lint",
     "prepush": "npm run test",
-    "prepublishOnly": "npm run clean && npm run reinstall && npm run lint && npm run tsc && npm run test && npm run build",
+    "prepublishOnly": "npm run clean && npm run reinstall && npm run lint && npm run build && npm run test",
     "coverage": "rimraf coverage && jest --config jest.config.json --coverage"
   },
   "dependencies": {
@@ -56,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gcanti/fp-ts.git"
+    "url": "https://github.com/mocoolka/mocoolka-fp.git"
   },
   "keywords": [
     "mocoolka",

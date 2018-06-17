@@ -1,6 +1,6 @@
 export * from 'io-ts';
 import * as t from 'io-ts';
-import { Lens, Optional } from './Monocle';
+import { Lens, Optional, Getter } from './Monocle';
 import { PathReporter, success as successReporter, failure as failureReporter } from 'io-ts/lib/PathReporter';
 import { ThrowReporter } from 'io-ts/lib/ThrowReporter';
 export { PathReporter, successReporter, failureReporter, ThrowReporter };
@@ -99,4 +99,94 @@ export const lensesFromNullableProps = <P extends t.Props>(props: P): OptionalFr
         r[k] = Optional.fromNullableProp<any, typeof k, typeof k>(k);
     });
     return r;
+};
+
+export const integer = t.Integer;
+
+export const RRuntimeBasic = t.union([t.string, t.number, integer, t.boolean, dateFromISOString, dateFromNumber]);
+export type TRuntimeBasicType = t.TypeOf<typeof RRuntimeBasic>;
+export const RString = t.literal('string');
+export const RNumber = t.literal('number');
+export const RInteger = t.literal('integer');
+export const RBoolean = t.literal('boolean');
+export const RAny = t.literal('any');
+export const RDateFromISOString = t.literal('dateFromISOString');
+export const RDateFromNumber = t.literal('dateFromNumber');
+export const RBasicType = t.union([
+    RString,
+    RNumber,
+    RInteger,
+    RBoolean,
+    RDateFromISOString,
+    RDateFromNumber,
+]);
+export const RBasicAnyType = t.union([
+    RBasicType,
+    RAny,
+]);
+export type TBasicType = t.TypeOf<typeof RBasicType>;
+export type TBasicAnyType = t.TypeOf<typeof RBasicAnyType>;
+export const RBasicTypeArray = t.tuple([RBasicType]);
+export const RInputBasicType = t.union([RBasicAnyType, RBasicTypeArray]);
+export type TInputBasicType = t.TypeOf<typeof RInputBasicType>;
+export const RBasicIType = t.union([RBasicAnyType, t.string]);
+export type TBasicIType = t.TypeOf<typeof RBasicIType>;
+export const RTypeArray = t.tuple([RBasicIType]);
+export const RInputType = t.union([RBasicIType, RTypeArray]);
+export type TInputType = t.TypeOf<typeof RInputType>;
+
+export const RSchemaType = t.type({
+    name: RBasicIType,
+    isArray: t.boolean,
+});
+export type TType = t.TypeOf<typeof RSchemaType>;
+/**
+ * The type input is number,The output is Date.
+ */
+export class TypeFromStringType extends t.Type<TType, TInputType> {
+    readonly _tag: 'TypeFromStringType' = 'TypeFromStringType';
+    constructor() {
+        super(
+            'TypeFromString',
+            (m): m is TType => RBasicIType.is(m),
+            (m, c) => {
+                const validation = RInputType.validate(m, c);
+                if (validation.isLeft()) {
+                    return validation as any;
+                } else {
+                    const n = validation.value;
+
+                    return t.success({
+                        name: RBasicIType.is(n) ? n : n[0],
+                        isArray: RTypeArray.is(n),
+                    });
+                }
+            },
+            a => a.isArray ? [a.name] : a.name
+        );
+    }
+}
+export const typeFromString = new TypeFromStringType();
+export type PropertyType = t.TypeOf<typeof typeFromString>;
+
+export const basicTypeRuntime: { [P in TBasicAnyType]: t.Type<any> } = {
+    string: t.string,
+    number: t.number,
+    integer,
+    boolean: t.boolean,
+    dateFromISOString: dateFromISOString,
+    dateFromNumber: dateFromNumber,
+    any: t.any,
+};
+/**
+ * Get type with string
+ */
+export const BasicGetter = new Getter<TBasicType, t.Type<any>>((name) => basicTypeRuntime[name]);
+export const lensesFromIntersection = <A extends t.Props, B extends t.Props>
+    (_intersection: t.IntersectionType<[t.InterfaceType<A>, t.PartialType<B>]>)
+    : { props: LensesFromProps<A>; nullProps: OptionalFromNullableProps<B> } => {
+    return {
+        props: lensesFromProps(_intersection.types[0].props),
+        nullProps: lensesFromNullableProps(_intersection.types[1].props),
+    };
 };

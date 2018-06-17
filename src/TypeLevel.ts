@@ -1,9 +1,9 @@
-export declare type KeyofType= string |number | symbol;
+export declare type KeyofType = string | number | symbol;
 export declare type StringOmit<L1 extends KeyofType, L2 extends KeyofType> = ({
     [P in L1]: P;
 } & {
-    [P in L2]: never;
-} & {
+        [P in L2]: never;
+    } & {
     [key: string]: never;
 })[L1];
 export declare type StringIntersection<L1 extends string, L2 extends string> = StringOmit<L1, StringOmit<L1, L2>>;
@@ -25,3 +25,7 @@ export declare type Purify<T extends KeyofType> = {
 export declare type NonNullable<T> = T & {};
 
 export declare type TypeOverride<O, K extends keyof O> = ObjectOverwrite<O, Required<Pick<O, K>>>;
+
+export declare type Many<T> = T | T[];
+export type PropertyName = string | number | symbol;
+export type ManyPropertyName = Many<PropertyName>;
