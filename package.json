@@ -1,13 +1,10 @@
 {
   "name": "mocoolka-fp",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "lib/index.js",
-  "types": [
-    "lib/index.d.ts"
-  ],
+  "types": "lib/index.d.ts",
   "files": [
-    "lib",
-    "node_modules/@types/lodash"
+    "lib"
   ],
   "author": "fastspeeed@gmail.com",
   "engines": {
