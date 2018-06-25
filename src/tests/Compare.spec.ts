@@ -1,7 +1,7 @@
 import {
     stringCompare,  numberCompare, booleanCompare, arrayCompare,
 } from '../Compare';
-import { filter } from 'mocoolka-fp/lib/Array';
+import { filter } from '../Array';
 const a = [1, 2, 3];
 const b = ['1', '2', '3'];
 describe('Compare', () => {

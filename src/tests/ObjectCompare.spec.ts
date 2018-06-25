@@ -1,7 +1,7 @@
 import {
     stringObjectCompare,   arrayObjectCompare,  numberObjectCompare, booleanObjectCompare
 } from '../ObjectCompare';
-import { filter } from 'mocoolka-fp/lib/Array';
+import { filter } from '../Array';
 describe('Compare', () => {
     it('object string', () => {
         expect(stringObjectCompare.eq('name')('1')({})).toEqual(false);

@@ -52,7 +52,8 @@ export const notEndsWith = (substring: string) => not(endsWith(substring));
  * @return {boolean}
  */
 export const includes = (str: string, substring: string, fromIndex = 0) => str.indexOf(substring, fromIndex) !== -1;
-export { upperFirst, lowerFirst } from 'lodash';
+import { upperFirst, lowerFirst } from 'lodash';
+export { upperFirst, lowerFirst };
 export const contains = (substring: string) => (str: string) =>
   str.indexOf(substring, 0) !== -1;
 

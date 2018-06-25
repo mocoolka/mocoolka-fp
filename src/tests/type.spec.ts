@@ -1,7 +1,7 @@
 import * as t from '../Type';
-import { tryCatch } from 'mocoolka-fp/lib/Exception';
-import { IO } from 'mocoolka-fp/lib//IO';
-import { right } from 'mocoolka-fp/lib//Either';
+import { tryCatch } from '../Exception';
+import { IO } from '../IO';
+import { right } from '../Either';
 describe('helper', () => {
     it('decodeFromAny', () => {
         expect(t.decodeFromAny(t.string)('file')).toEqual('file');

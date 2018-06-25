@@ -1,7 +1,7 @@
 import {
-    getCompareFunction, compareArrayParams
+    getCompareFunction
 } from '../TypeCompare';
-import { isFunction } from 'mocoolka-fp/lib/predicate';
+import { isFunction } from '../predicate';
 describe('Compare', () => {
     it('string', () => {
         expect(getCompareFunction('string', 'eq')('1')('1')).toEqual(true);

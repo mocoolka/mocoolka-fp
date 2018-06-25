@@ -1,15 +1,12 @@
 {
   "name": "mocoolka-fp",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
   "author": "fastspeeed@gmail.com",
-  "engines": {
-    "node": ">= 4"
-  },
   "scripts": {
     "reinstall": "rm -rf node_modules/ && yarn install",
     "typings-checker": "typings-checker --allow-expect-error --project typings-checker/tsconfig.json typings-checker/index.ts",
@@ -25,7 +22,6 @@
     "coverage": "rimraf coverage && jest --config jest.config.json --coverage"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.110",
     "fp-ts": "^1.6.2",
     "io-ts": "^1.1.5",
     "io-ts-codegen": "^0.1.7",
@@ -36,14 +32,12 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
+    "@types/lodash": "^4.14.110",
     "jest": "^22.4.4",
-    "jest-cli": "^22.4.4",
     "rimraf": "^2.6.2",
     "ts-jest": "^22.4.6",
-    "ts-node": "^5.0.1",
     "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "typings-checker": "^2.0.0"
+    "typescript": "^2.9.2"
   },
   "jest": {
     "moduleFileExtensions": [

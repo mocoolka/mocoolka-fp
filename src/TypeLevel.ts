@@ -26,6 +26,7 @@ export declare type NonNullable<T> = T & {};
 
 export declare type TypeOverride<O, K extends keyof O> = ObjectOverwrite<O, Required<Pick<O, K>>>;
 
-export declare type Many<T> = T | T[];
-export type PropertyName = string | number | symbol;
-export type ManyPropertyName = Many<PropertyName>;
+export type Manys<T> = T | T[];
+export type TPropertyName = string | number | symbol;
+export type TManyPropertyName = string | number |string[]|number[] ;
+export type GetProperty = (propName: Manys<TPropertyName>) => (a: object) => any;

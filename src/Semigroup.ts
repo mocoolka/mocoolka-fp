@@ -1,6 +1,6 @@
 export * from 'fp-ts/lib/Semigroup';
 import {Semigroup} from 'fp-ts/lib/Semigroup';
-import { merge } from './object';
+import { merge } from 'lodash';
 /** @function */
 export const getObjectMSemigroup = <O>(): Semigroup<O> => {
     return {
