@@ -1,4 +1,4 @@
-import { getObjectSemigroup } from '../Semigroup';
+import { getObjectMSemigroup } from '../Semigroup';
 describe('Semigroup', () => {
     it('getObjectSemigroup', () => {
         interface A<B> {
@@ -14,10 +14,11 @@ describe('Semigroup', () => {
             c1: ['a', 'b'],
         };
         const b: AP = {
+            c1: ['a', 'b','c',],
             c2: ['c'],
         };
-        const S = getObjectSemigroup<AP>();
+        const S = getObjectMSemigroup<AP>();
         const result: AP = S.concat(a, b);
-        expect(result).toEqual({ c1: ['a', 'b'], c2: ['c'] });
+        expect(result).toEqual({ c1: ["a", "b", "a", "b", "c"], c2: ['c'] });
     });
 });

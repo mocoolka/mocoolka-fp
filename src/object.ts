@@ -2,10 +2,10 @@ import { fromFoldable } from './StrMap';
 import { moveAndFillRight, zip, array } from './Array';
 import { TManyPropertyName } from './TypeLevel';
 import {
-    get, has, mapKeys, mapValues, pick, pickBy, merge,
+    get, has, mapKeys, mapValues, pick, pickBy, merge, mergeWith
 } from 'lodash';
 export {
-    get, has, mapKeys, mapValues, pick, pickBy, merge,
+    get, has, mapKeys, mapValues, pick, pickBy, merge, mergeWith
 };
 import { ObjectDiff } from './TypeLevel';
 export const moveAndFillRightObject = (a: {}) => {
