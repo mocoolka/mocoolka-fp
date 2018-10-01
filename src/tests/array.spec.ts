@@ -1,16 +1,21 @@
 import {
     deleteLast, deleteFirst, moveAndFillLeftOrRight, timeSelf,
-    moveAndFillLeft, moveAndFillRight, removeduplicate, remove,
-    sliceFirst, sliceAfter, sliceBefore, sliceLast, sliceSkip
+    moveAndFillLeft, moveAndFillRight, removeduplicate, deleteByIdWhile,modifyByIdWhile,
+    sliceFirst, sliceAfter, sliceBefore, sliceLast, sliceSkip,
+    min,max,concatMinArray,headArrayOption
 } from '../Array';
+import {some,none} from '../Option'
 const a = [1, 2, 3];
 describe('array', () => {
     it('removeduplicate', () => {
         expect(removeduplicate([1, 2, 1, 2, 3])).toEqual([1, 2, 3]);
         expect(removeduplicate([])).toEqual([]);
     });
-    it('remove', () => {
-        expect(remove([1, 2, 3], b => b === 2)).toEqual([1, 3]);
+    it('deleteByIdWhile', () => {
+        expect(deleteByIdWhile([1, 2, 3], b => b === 2)).toEqual(some([1, 3]));
+    });
+    it('modifyByIdWhile', () => {
+        expect(modifyByIdWhile([1, 2, 3], b => b === 2,_=>4)).toEqual(some([1,4, 3]));
     });
     it('deleteLast', () => {
         expect(deleteLast(a)).toEqual([1, 2]);
@@ -47,10 +52,24 @@ describe('array', () => {
         expect(sliceSkip(2)([1, 2, 3, 4])).toEqual([3, 4]);
     });
     it('sliceBefore', () => {
-        expect(sliceBefore(b => b === 3)([1, 2, 3, 4])).toEqual([1, 2]);
+        expect(sliceBefore(b => b === 3)([1, 2, 3, 4])).toEqual(some([1, 2]));
     });
     it('sliceAfter', () => {
-        expect(sliceAfter(b => b === 3)([1, 2, 3, 4])).toEqual([4]);
+        expect(sliceAfter(b => b === 3)([1, 2, 3, 4])).toEqual(some([4]));
     });
+    it('min',()=>{
+        expect(min([1,2,3])).toEqual(1);
+    })
+    it('max',()=>{
+        expect(max([1,2,3])).toEqual(3);
+    })
+    it('concatMinArray',()=>{
+        expect(concatMinArray([],[])).toEqual([]);
+        expect(concatMinArray([1,2,3],[{a:1}])).toEqual([[1,{a:1}]]);
+    })  
+    it('headArrayOption',()=>{
+        expect(headArrayOption([none,some(1)])).toEqual(some(1));
+        expect(headArrayOption([none,none])).toEqual(none);
+    })
 
 });

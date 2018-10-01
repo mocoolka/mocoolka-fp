@@ -24,6 +24,7 @@ import * as reader from './Reader';
 import * as readerEither from './ReaderEither';
 import * as readerT from './ReaderT';
 import * as semigroup from './Semigroup';
+import * as string from './string';
 import * as setoid from './Setoid';
 import * as strmap from './StrMap';
 import * as task from './Task';
@@ -50,5 +51,5 @@ export {
     setoid, state, stateT, store, strmap, task, taskEither, these, trace, traversable, tuple,
     unfoldable, validation, writer,
     monocle, type, types, newtype,
-     object, predicate
+    string, object, predicate
 };

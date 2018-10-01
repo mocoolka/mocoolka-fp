@@ -13,6 +13,10 @@ export declare type ObjectOmit<O, K extends KeyofType> = Pick<O, StringOmit<keyo
 export declare type ObjectDiff<O1 extends O2, O2> = ObjectOmit<O1, keyof O2> & Partial<O2>;
 export declare type ObjectClean<T> = Pick<T, keyof T>;
 export declare type ObjectOptional<O, K extends keyof O> = ObjectOmit<O, K> & Partial<Pick<O, K>>;
+export declare type ObjectAbbr<O extends {[key: string]: any}, A extends {[k: string]:
+     Extract<keyof O, string>}> = O & {[m in (keyof A) ]: O[A[m]]};
+export declare type ObjectUpdate<O, U extends keyof O, T> = { [k in U]: O[k] | T } & ObjectOmit<O, U>;
+export declare type ObjectGet<O, U extends keyof O, T> = { [k in U]: O[k] | T };
 export declare type PickExact<O, K extends keyof O> = Pick<O, K> & {
     [K1 in StringOmit<keyof O, K>]?: never;
 };
@@ -26,6 +30,7 @@ export declare type NonNullable<T> = T & {};
 
 export declare type TypeOverride<O, K extends keyof O> = ObjectOverwrite<O, Required<Pick<O, K>>>;
 
-export declare type Many<T> = T | T[];
-export type PropertyName = string | number | symbol;
-export type ManyPropertyName = Many<PropertyName>;
+export type Manys<T> = T | T[];
+export type TPropertyName = string | number | symbol;
+export type TManyPropertyName = string | number |string[]|number[] ;
+export type GetProperty = (propName: Manys<TPropertyName>) => (a: object) => any;

@@ -1,14 +1,16 @@
 
 export * from 'fp-ts/lib/Array';
-import { unsafeDeleteAt, head, cons, snoc, last, copy } from 'fp-ts/lib/Array';
-import { Predicate } from 'fp-ts/lib/function';
+import { unsafeDeleteAt, head, cons, snoc, last, catOptions, modifyAt, findIndex, deleteAt } from 'fp-ts/lib/Array';
+import { Predicate, Endomorphism } from 'fp-ts/lib/function';
 import { groupBy as _groupBy, uniq as removeduplicate, remove as _remove } from 'lodash';
 export { removeduplicate };
-export const remove = <T>(a: T[], predicate: Predicate<T>) => {
-    const b = copy(a);
-    _remove(b, predicate);
-    return b;
-};
+import { Bounded, boundedNumber } from './Bounded';
+import { fold, getJoinSemigroup, getMeetSemigroup } from './Semigroup';
+import { Option } from './Option';
+export const modifyByIdWhile = <T>(as: T[], predicate: Predicate<T>, f: Endomorphism<T>) =>
+    findIndex(as, predicate).chain(n => modifyAt(as, n, f));
+export const deleteByIdWhile = <T>(as: T[], predicate: Predicate<T>) =>
+    findIndex(as, predicate).chain(n => deleteAt(n, as));
 /**
  * removes the last element from an array and returns that array.
  * @param a
@@ -36,7 +38,7 @@ export const timeSelf = (i: number) => <P>(p: P) => (func: ((a: P) => P)) => {
     return value;
 };
 
-const findIndex = <A>(as: Array<A>, predicate: Predicate<A>): number => {
+/* const findIndex = <A>(as: Array<A>, predicate: Predicate<A>): number => {
     const l = as.length;
     let i = 0;
     for (; i < l; i++) {
@@ -45,16 +47,12 @@ const findIndex = <A>(as: Array<A>, predicate: Predicate<A>): number => {
         }
     }
     return i;
-};
-export const sliceBefore = <A>(predicate: Predicate<A>) => (as: Array<A>): Array<A> => {
-    const i = findIndex(as, predicate);
-    return as.slice(0, i);
-};
+}; */
+export const sliceBefore = <A>(predicate: Predicate<A>) => (as: Array<A>): Option<Array<A>> =>
+    findIndex(as, predicate).map(i => as.slice(0, i));
 
-export const sliceAfter = <A>(predicate: Predicate<A>) => (as: Array<A>): Array<A> => {
-    const i = findIndex(as, predicate);
-    return as.slice(i + 1);
-};
+export const sliceAfter = <A>(predicate: Predicate<A>) => (as: Array<A>): Option<Array<A>> =>
+    findIndex(as, predicate).map(i => as.slice(i + 1));
 
 export const sliceLast = <A>(n: number) => (as: Array<A>): Array<A> => {
     return as.slice(as.length - n);
@@ -67,3 +65,32 @@ export const sliceSkip = <A>(n: number) => (as: Array<A>): Array<A> => {
     return as.slice(n);
 };
 export const groupBy = <A>(a: (b: A) => string) => (as: Array<A>): { [name: string]: A[] } => _groupBy(as, a);
+
+const _min = <A>(B: Bounded<A>): ((as: Array<A>) => A) => fold(getMeetSemigroup(B))(B.top);
+const _max = <A>(B: Bounded<A>): ((as: Array<A>) => A) => fold(getJoinSemigroup(B))(B.bottom);
+/**
+ * get mix value in number'array
+ */
+export const min = _min(boundedNumber);
+/**
+ * get max value in number'array
+ */
+export const max = _max(boundedNumber);
+/**
+ * concat array with mix length
+ * @param v
+ * @param s
+ */
+export const concatMinArray = <A, B>(v: A[], s: B[]) => {
+    const length = min([v.length, s.length]);
+    const result: Array<[A, B]> = [];
+    for (let i = 0; i < length; i++) {
+        result.push([v[i], s[i]]);
+    }
+    return result;
+};
+/**
+ * get first some value in Array<Option>
+ * @param r
+ */
+export const headArrayOption = (r: Array<Option<any>>) => head(catOptions(r));
