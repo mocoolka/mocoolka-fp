@@ -1,4 +1,4 @@
-import { createAction, Action, getResult, composeDispatch, Dispatch } from '../actions';
+import { createAction, Action, getResult, composeSelector, Selector } from '../actions';
 import { deleteByIdWhile,  modifyByIdWhile } from '../Array';
 const addUser = createAction<{ name: string, email: string }>('AddUser');
 const deleteUser = createAction<string>('DeleteUser');
@@ -16,22 +16,22 @@ const store: Store = {
         email: 'jyt@gmail.com'
     }]
 }
-export const dispatch: Dispatch<any, Store> = (action: Action<any>) => (store) => {
+export const dispatch: Selector<Store,any> = (action: Action<any>) => (store) => {
 
     return getResult([
         addUser.getOption(action).map(a => ({ users: [...store.users, a] })),
         deleteUser.getOption(action).map(a => ({ users: deleteByIdWhile(store.users, b => b.name === a).getOrElse(store.users) })),
-    ], store)
+    ]).getOrElse(store)
 
 }
-export const dispatch1: Dispatch<any, Store> = (action: Action<any>) => (store) => {
+export const dispatch1: Selector<Store,any> = (action: Action<any>) => (store) => {
 
     return modifyUser.getOption(action).map(
         a => ({ users: modifyByIdWhile(store.users, b => b.name === a.name, c => ({ ...c, email: a.email })).getOrElse(store.users) })).getOrElse(store);
 
 }
 
-export const m = composeDispatch(dispatch, dispatch1);
+export const m = composeSelector(dispatch, dispatch1);
 describe('action', () => {
     it('createAction', () => {
         const g = addUser.reverseGet({ name: 'fast', email: 'fast@gamil.com' })

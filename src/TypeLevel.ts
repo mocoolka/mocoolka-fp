@@ -34,3 +34,7 @@ export type Manys<T> = T | T[];
 export type TPropertyName = string | number | symbol;
 export type TManyPropertyName = string | number |string[]|number[] ;
 export type GetProperty = (propName: Manys<TPropertyName>) => (a: object) => any;
+
+export type Omit<A extends object, K extends string | number | symbol> = Pick<A, Exclude<keyof A, K>>;
+export type Overwrite<A extends object, B extends object> = Pick<A, Exclude<keyof A, keyof B>> & B;
+export type Diff<A extends object, K extends keyof A> = Omit<A, K> & Partial<Pick<A, K>>;
